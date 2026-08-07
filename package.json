@@ -1,0 +1,17 @@
+{
+  "name": "webdev",
+  "version": "1.0.0",
+  "description": "This is my app",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Krish Raj",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "chalk": "^6.0.0"
+  }
+}
