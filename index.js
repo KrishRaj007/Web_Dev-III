@@ -26,6 +26,15 @@
 // console.log(chalk.yellow("Warning: This action may have consequences"));
 
 const process = require('process');
-console.log(process.argv[2]);
+// console.log(process.argv[2]);
 require('dotenv').config();
-console.log(process.env.PORT)
+// console.log(process.env.PORT)
+const http = require('http');
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write('<h1>Hello World!</h1>');
+    res.end();
+});
+server.listen(process.env.PORT, () => {
+    console.log(`Server ${process.env.PORT}`)
+});
