@@ -1,9 +1,16 @@
 const express = require("express");
 const app = express();
 let port = 7000;
-app.get("/", (req, res) => {
-  res.send("Hello World");
+
+const packages = require("./data/tour");
+
+app.get("/",(req,res) => {
+    res.send("Hello WOrld");
 });
-app.listen(port, () => {
+
+app.get("/",(req,res) => {
+    res.json(packages);
+})
+app.listen(port,() => {
   console.log(`Server is running on port ${port}`);
 });
