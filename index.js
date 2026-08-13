@@ -5,12 +5,32 @@ let port = 7000;
 const packages = require("./data/tour");
 
 app.get("/",(req,res) => {
-    res.send("Hello WOrld");
+    res.send("Hello World");
 });
 
-app.get("/",(req,res) => {
+app.get("/packages",(req,res)=>{
     res.json(packages);
-})
+});
+
+app.get("/packages/:id",(req,res)=>{
+    const packagesId = parseInt(req.params.id);
+    const selectedPackages = packages.find(item => item.id === packagesId);
+    res.json(selectedPackages);
+});
+
+app.get("/packages", (req, res) => {
+    const {des} = req.query;
+
+    if (des) {
+        const filtered = packages.filter((pkg) =>
+            pkg.name.includes(des) |
+        pkg.description.iclude(des));
+        return res.json(filtered);
+
+    }
+      res.json(packages);
+});
+
 app.listen(port,() => {
   console.log(`Server is running on port ${port}`);
 });
