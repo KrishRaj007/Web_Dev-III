@@ -9,7 +9,11 @@ const getAll = () => {
 
 const getById = (id) => {
     const tours = getAll();
-    return tours.find(tour => tour.id === id);
+    const index = tours.findIndex(tour => tour.id === id);
+    if (index === -1){
+        return null
+    }
+
 }
 
 const getByQuery = (query) => {
@@ -17,9 +21,38 @@ const getByQuery = (query) => {
     return tours.filter(tour => tour.name.includes(query)
     );
 };
+const save = (newTours) => {
+    const tours = getAll();
+    tours.push(newTours);
+    fs.writeFileSync(toursFilePath, JSON.stringify(tours));
+}
+
+const updateTour = (id, updatedTour) => {
+    const tours = getAll();
+    const index = tours.findIndex(tour => tour.id === id);
+    if (index === -1) {
+        return null;
+    }
+    tours[index] = {id, ...updatedTour };
+    fs.writeFileSync(toursFilePath, JSON.stringify(tours));
+    return tours[index];
+}
+const deleteTour = (id) => {
+    const tours = getAll();
+    const index = tours.findIndex(tour => tour.id === id);
+    if (index === -1) {
+        return null;
+    }
+    tours.splice(index, 1);
+    fs.writeFileSync(toursFilePath, JSON.stringify(tours));
+    return { message: 'Tour deleted successfully' };
+};
 
 module.exports = {
     getAll,
     getById,
-    getByQuery
+    getByQuery,
+    save,
+    updateTour,
+    deleteTour
 };

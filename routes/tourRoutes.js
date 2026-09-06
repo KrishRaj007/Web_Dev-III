@@ -4,12 +4,8 @@ const tourController = require('../controller/tourController');
 router.get('/tours/', tourController.getAllTours);
 router.get('/tours/:id', tourController.getTourById);
 router.get('/tours/search', tourController.getToursByQuery);
-router.post('/tours', (req, res) => {
-    const newTour = req.body;
-    const tours = tourController.getAllTours();
-    tours.push(newTour);
-    tourController.save(newTour);
-    res.status(201).json({ message: 'Tour created successfully' });
-});
+router.post('/tours', tourController.saveTours);
+router.put('/tours/:id', tourController.updateTour);
+router.delete('/tours/:id', tourController.deleteTourByID);
 
 module.exports = router;
